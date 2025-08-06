@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我想对你说</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .heart {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 30px auto;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        .heart:before, .heart:after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            background: #ff0000;
+            border-radius: 50px 50px 0 0;
+        }
+
+        .heart:before {
+            left: 50px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .message {
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            margin: 20px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.3);
+            max-width: 80%;
+        }
+
+        .special-text {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffd93d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px rgba(255,107,107,0.5); }
+            50% { text-shadow: 0 0 20px rgba(255,142,142,0.8); }
+            100% { text-shadow: 0 0 10px rgba(255,107,107,0.5); }
+        }
+
+        .hidden-message {
+            display: none;
+            color: white;
+            font-size: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255,255,255,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="heart"></div>
+    <div class="message">
+        <p>从遇见你的那一刻起</p>
+        <p>我的世界就被点亮了</p>
+        <p class="special-text">我喜欢你！</p>
+        <p>愿意做我的爱人吗？</p>
+    </div>
+    
+    <button onclick="showHiddenMessage()">点击查看我的心意</button>
+    <div id="hiddenMessage" class="hidden-message">
+        <p>遇见你是我最美丽的意外</p>
+        <p>每一天因为有你而变得特别</p>
+        <p>余生请你指教 ❤️</p>
+    </div>
+
+    <script>
+        function showHiddenMessage() {
+            document.getElementById('hiddenMessage').style.display = 'block';
+            document.querySelector('button').style.display = 'none';
+            
+            // 添加漂浮爱心效果
+            for(let i = 0; i < 10; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.opacity = Math.random() * 0.5 + 0.5;
+            heart.style.animation = `float ${Math.random() * 3 + 2}s linear infinite`;
+            document.body.appendChild(heart);
+            
+            // 添加漂浮动画
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes float {
+                    0% { transform: translateY(0) rotate(0deg); }
+                    100% { transform: translateY(-100vh) rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    </script>
+</body>
+</html>
